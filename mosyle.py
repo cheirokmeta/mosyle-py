@@ -3,27 +3,23 @@ from json2html import *
 import argparse
 
 def mosyle_handler(mosyleList):
-    mosyle_args = {'restart': 'restart_devices', 'shutdown': 'shutdown_devices'}
-    for k, v in mosyle_args.items():
-        if k == str(mosyleList[0][0]):
-            mosyleCommand = v
-            phoneUUID = str(mosyleList[0][1])
-    
-    def restart_device(mosyleCommand, phoneUUID):
-        url = 'https://businessapi.mosyle.com/v1/devices'
-        headers = { 
-            'Content-type': 'application/json', 
-            'accesstoken': '' }
-        body = { 
-            "operation": mosyleCommand, 
-            "devices": phoneUUID }
-        
-        response = requests.post(url, json=body, headers=headers)
-        response_json = response.json()
-        dumped_response = json.dumps(response_json, indent=1)
-        return dumped_response
-    response = restart_device(mosyleCommand, phoneUUID)
-    return response
+  mosyleCommand = str(mosyleList[0][0])
+  phoneUUID = str(mosyleList[0][1])
+  def restart_device(mosyleCommand, phoneUUID):
+    url = 'https://businessapi.mosyle.com/v1/devices'
+    headers = { 
+    'Content-type': 'application/json', 
+    'accesstoken': '' }
+    body = { 
+    "operation": mosyleCommand+'_devices', 
+    "devices": phoneUUID 
+    }
+    response = requests.post(url, json=body, headers=headers)
+    response_json = response.json()
+    dumped_response = json.dumps(response_json, indent=1)
+    return dumped_response
+  response = restart_device(mosyleCommand, phoneUUID)
+  return response
 
 def main():
     # Argument definition
