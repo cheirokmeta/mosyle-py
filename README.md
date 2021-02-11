@@ -12,3 +12,6 @@ Currently supported ```--command``` arguments:
 * shutdown
 * restart
 * info
+
+## License
+This project is distributed under the [GNU General Public License v2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html).
