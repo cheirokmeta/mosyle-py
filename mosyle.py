@@ -3,9 +3,10 @@ import requests, json, argparse
 def mosyleRequest(body_json):
     # post request settings
     url = 'https://businessapi.mosyle.com/v1/devices'
+    token = ''
     headers = { 
         'Content-type': 'application/json', 
-        'accesstoken': ''
+        'accesstoken': token
     }
     # body_json is json data from argumentDefinitions
     json_in = body_json
