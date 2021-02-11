@@ -1,30 +1,47 @@
-import requests, json
+import requests, json, argparse
 from json2html import *
-import argparse
 
-def mosyle_handler(mosyleList):
-  mosyleCommand = str(mosyleList[0][0])
-  phoneUUID = str(mosyleList[0][1])
-  def restart_device(mosyleCommand, phoneUUID):
+def mosyle_handler(body_json):
     url = 'https://businessapi.mosyle.com/v1/devices'
     headers = { 
-    'Content-type': 'application/json', 
-    'accesstoken': '' }
-    body = { 
-    "operation": mosyleCommand+'_devices', 
-    "devices": phoneUUID 
+        'Content-type': 'application/json', 
+        'accesstoken': ''
     }
-    response = requests.post(url, json=body, headers=headers)
+    json_in = body_json
+    response = requests.post(url, json=json_in, headers=headers)
     response_json = response.json()
     dumped_response = json.dumps(response_json, indent=1)
     return dumped_response
-  response = restart_device(mosyleCommand, phoneUUID)
-  return response
+
+def shutdownDevice(device):
+    body = {
+        "operation": 'shutdown_devices',
+        "devices": device
+        }
+    return body
+    
+def restartDevice(device):
+    body = {
+        "operation": 'restart_devices',
+        "devices": device
+        }
+    return body
+
+def infoDevice(device):
+    body = { 
+        "operation": "list", 
+        "options":
+        {
+            "os": "ios",
+            'deviceudids': device 
+        }
+    }
+    return body
 
 def main():
     # Argument definition
     parser = argparse.ArgumentParser(
-        description='Mosyle API wrapper for actions on iOS devices',
+        description='## Mosyle API wrapper',
         prog='mosyle', 
         usage='%(prog)s [options] device')
     # Restart argument
@@ -46,13 +63,20 @@ def main():
     parser.add_argument(
         'device', 
         metavar='device')
-
+    
     args = vars(parser.parse_args())
-    mosyleList = []
-    for k,v in args.items():
-        if v == True:
-            params = [k, args['device']]
-            mosyleList.append(params)
-    out = mosyle_handler(mosyleList)
-    print(out)
+    
+    handler = {
+        'shutdown': shutdownDevice, 
+        'restart': restartDevice,
+        'info': infoDevice
+    }
+    
+    for key,value in args.items():
+        if value == True:
+          command = key
+          device = args['device']
+    command_data = handler[command](device)
+    command_results = mosyle_handler(command_data)
+    print(command_results)
 main()
