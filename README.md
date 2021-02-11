@@ -20,6 +20,6 @@ Currently supported ```--command``` arguments:
 ## LICENSE
 This project is distributed under the [GNU General Public License v2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html).
 
-## Copyright Attribution
+## ATTRIBUTION
 
 MOSYLE is a trademark of Mosyle Corporation. This project is not affiliated with the Mosyle Corporation.
