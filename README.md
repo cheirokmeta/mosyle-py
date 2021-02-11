@@ -8,7 +8,7 @@ This project provides examples for accessing [Mosyle](https://mosyle.com) accoun
 Make sure to set ```token``` in *device.py* to your Mosyle API token first.
 
 ```
-python devices.py --command [command] --device [device]
+python devices.py --command [command] --device [device UDID]
 ```
 
 Currently supported ```--command``` arguments:
