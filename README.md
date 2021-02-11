@@ -1,7 +1,7 @@
 # mosyle-py
 ## INTRODUCTION
 
-
+This project provides examples for accessing [Mosyle](https://mosyle.com) account & device data. 
 
 ## USAGE
 
