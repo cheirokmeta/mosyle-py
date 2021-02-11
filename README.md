@@ -17,6 +17,16 @@ Currently supported ```--command``` arguments:
 * restart
 * info
 
+## OUTPUT EXAMPLES
+
+```
+python devices.py --command info --device ########-################ | grep -A3 "osversion"
+     "osversion": "14.5",
+     "date_info": "1613081246",
+     "carrier": "Redacted ",
+     "roaming_enabled": "1",
+```
+
 ## LICENSE
 This project is distributed under the [GNU General Public License v2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html).
 
