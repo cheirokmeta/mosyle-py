@@ -65,6 +65,7 @@ def main():
     
     # send json body to mosyle api request function
     mosyleRequest(command_data)
-    
-main()
+   
+if __name__ == "__main__":
+    main()
 
